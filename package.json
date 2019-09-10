@@ -1,0 +1,53 @@
+{
+  "name": "typescript-mongoose",
+  "version": "1.0.0",
+  "description": "Typescript + mongoose",
+  "main": "dist/main.js",
+  "scripts": {
+    "postinstall": "npm run build",
+    "start": "node .",
+    "lint": "./node_modules/tslint/bin/tslint './src/**/*.ts'",
+    "test": "./node_modules/mocha/bin/mocha",
+    "coverage": "./node_modules/nyc/bin/nyc.js ./node_modules/mocha/bin/mocha",
+    "coverage-html": "./node_modules/nyc/bin/nyc.js --reporter=html ./node_modules/mocha/bin/mocha",
+    "build": "npm run build-ts",
+    "build-ts": "./node_modules/typescript/bin/tsc",
+    "watch-ts": "./node_modules/typescript/bin/tsc -w"
+  },
+  "author": "wildpotato",
+  "dependencies": {
+    "mongoose": "^5.7.0"
+  },
+  "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@types/chai": "^4.1.7",
+    "@types/chai-as-promised": "^7.1.1",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.7.4",
+    "@types/sinon-chai": "^3.2.2",
+    "@types/sinon-express-mock": "^1.3.7",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "jsdom": "^15.1.1",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "sinon": "^7.3.2",
+    "sinon-chai": "^3.3.0",
+    "source-map-support": "^0.5.13",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "typescript": "^3.5.3"
+  },
+  "nyc": {
+    "all": true,
+    "extends": "@istanbuljs/nyc-config-typescript",
+    "include": [
+      "src/**/*"
+    ],
+    "reporter": [
+      "text",
+      "lcov"
+    ]
+  }
+}
