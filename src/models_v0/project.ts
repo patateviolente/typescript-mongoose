@@ -6,23 +6,23 @@ export interface ProjectProperties {
 }
 
 export interface ProjectDocument extends ProjectProperties, mongoose.Document {
-  projectMethod(a: number): string;
+  getLocation(a: number): [number, number];
 }
 
 export interface ProjectModel extends mongoose.Model<ProjectDocument> {
-  projectStatic(): number;
+  projectStatic(): string;
 }
 
 const projectSchema = new Schema({
   visibility: { type: String },
 });
 
-projectSchema.methods.projectMethod = function (a: number): number  {
-  return a + 10;
+projectSchema.methods.getLocation = function (a: number): [number, number] {
+  return [a + 2.35, 48.78];
 };
 
-projectSchema.statics.projectStatic = function () {
-  return 20;
+projectSchema.statics.projectStatic = function (): string {
+  return 'Hello from static world!';
 };
 
 export default mongoose.model<ProjectDocument, ProjectModel>('Project', projectSchema);

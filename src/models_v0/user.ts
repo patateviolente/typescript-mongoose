@@ -4,28 +4,32 @@ import { ProjectDocument } from './project';
 import Project from './project';
 
 export interface UserProperties {
-  _project: ProjectDocument,
-  email: string,
 }
 
 export interface UserDocument extends UserProperties, mongoose.Document {
-  // Imagine you have to copy prototypes of 100 methods in there :/
-  userMethod1(start: number): number,
+  // Document related element in here
+  // I'm ok to copy attributes in here
+  _project: ProjectDocument,
+  email: string,
+
+  // ...But I can't maintain hundreds of methods :/
+  summarize(): Promise<string>;
 }
 
-export interface UserModel extends mongoose.Model<UserDocument> {}
+export interface UserModel extends mongoose.Model<UserDocument> {
+  // Static prototypes in there
+}
 
 const userSchema = new Schema({
   _project: { type: Schema.Types.ObjectId, ref: 'Project' },
   email: { type: String, unique: true },
 });
 
-userSchema.methods.userMethod1 = function (start: number): number {
-  const init = Project.projectStatic();
+userSchema.methods.summarize = async function (): Promise<string> {
+  const something = Project.projectStatic();
+  const location: Error = this._project.getLocation({});
 
-  const u = this._project.projectMethod(init + start);
-
-  return u;
+  return `One project lon=${location[0]} ; lat=${location[2]}\n${something}`;
 };
 
 export default mongoose.model<UserDocument, UserModel>('User', userSchema);
