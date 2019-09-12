@@ -26,3 +26,25 @@ To improve:
 - every methods has to say themselve as document `(this: UserDocument)`
 - Big migrations will modified with too indent on each line, making it uncertain to review.
 
+### v2
+Define methods in a class
+
+Advantage:
+- no duplicated definition in interfaces and classes
+
+To improve:
+- mongoose document / models methods like `find()` are not linked
+- every methods has to say themselve as document `(this: UserDocument)`
+- Big migrations will modified with too indent on each line, making it uncertain to review.
+
+### v3
+Define methods in a class
+
+Advantage:
+- no duplicated definition in interfaces and classes
+- mongoose document / models like `find()` are linked
+
+To improve:
+- every methods has to say themselve as document `(this: UserDocument)`
+- Big migrations will modified with too indent on each line, making it uncertain to review.
+

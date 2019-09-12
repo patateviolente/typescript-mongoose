@@ -3,6 +3,8 @@ import { Schema } from 'mongoose';
 import { ProjectDocument } from './project2';
 import Project from './project2';
 
+let User: UserModel;
+
 export interface UserProperties {
   _project: ProjectDocument;
   email: string;
@@ -17,11 +19,14 @@ const userSchema = new Schema({
   email: { type: String, unique: true },
 });
 
-class UserMethods extends mongoose.Model {
+class UserMethods {
   public async summarize(this: UserDocument): Promise<string> {
     // Testing model related methods with invalid signature
-    const p: boolean = await Project.findById(null).exec();
-    const u: boolean = this.findById(null).exec();
+    const func1: boolean = await Project.findById(null).exec();
+    const func2: boolean = this.save();
+    const email: boolean = this.email;
+    // NEW - find() is typesafe
+    const func3: boolean = await User.find().exec();
 
     const something = await Project.projectStatic();
     const location: [number, number] = this._project.getLocation(10);
@@ -30,4 +35,5 @@ class UserMethods extends mongoose.Model {
   }
 }
 
-export default mongoose.model<UserDocument, UserModel>('User', userSchema);
+User = mongoose.model<UserDocument, UserModel>('User', userSchema);
+export default User;

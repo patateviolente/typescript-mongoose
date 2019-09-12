@@ -25,8 +25,10 @@ const userSchema = new Schema({
 
 userSchema.methods.summarize = async function (this: UserDocument): Promise<string> {
   // Testing model related methods with invalid signature
-  const p: boolean = await Project.findById(null).exec();
-  const u: boolean = this.findById(null);
+  const func1: boolean = await Project.findById(null).exec();
+  const func2: boolean = await this.save();
+  const email: boolean = this.email;
+  const func3: boolean = await this.find().exec();
 
   const something = await Project.projectStatic();
   const location: [number, number] = this._project.getLocation(10);

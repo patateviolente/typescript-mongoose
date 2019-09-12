@@ -1,5 +1,8 @@
 import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
+import { UserModel } from './user2';
+
+let Project: ProjectModel;
 
 export interface ProjectProperties {
   visibility: 'public' | 'private';
@@ -23,4 +26,5 @@ class ProjectMethods extends mongoose.Model {
   }
 }
 
-export default mongoose.model<ProjectDocument, ProjectModel>('Project', projectSchema);
+Project = mongoose.model<ProjectDocument, ProjectModel>('Project', projectSchema);
+export default Project;

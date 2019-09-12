@@ -8,8 +8,10 @@ export interface UserProperties {
   email: string;
 }
 
+// NEW No more methods in there :)
 export interface UserDocument extends UserProperties, mongoose.Document, UserMethods {}
 
+// NEW No more statics in there :)
 export interface UserModel extends mongoose.Model<UserDocument> {}
 
 const userSchema = new Schema({
@@ -17,11 +19,14 @@ const userSchema = new Schema({
   email: { type: String, unique: true },
 });
 
-class UserMethods extends mongoose.Model {
+class UserMethods {
+  // NEW methods are in class
   public async summarize(this: UserDocument): Promise<string> {
     // Testing model related methods with invalid signature
-    const p: boolean = await Project.findById(null).exec();
-    const u: boolean = this.findById(null).exec();
+    const func1: boolean = await Project.findById(null).exec();
+    const func2: boolean = await this.save();
+    const email: boolean = this.email;
+    const func3: boolean = await this.find().exec();
 
     const something = await Project.projectStatic();
     const location: [number, number] = this._project.getLocation(10);
