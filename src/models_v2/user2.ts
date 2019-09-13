@@ -2,6 +2,7 @@ import * as mongoose from 'mongoose';
 import { Schema } from 'mongoose';
 import { ProjectDocument } from './project2';
 import Project from './project2';
+import { bindMethodsToSchema } from './tools';
 
 let User: UserModel;
 
@@ -34,6 +35,8 @@ class UserMethods {
     return `One project lon=${location[0]} ; lat=${location[1]}\n${something}`;
   }
 }
+
+bindMethodsToSchema(userSchema, UserMethods, 'methods');
 
 User = mongoose.model<UserDocument, UserModel>('User', userSchema);
 export default User;
